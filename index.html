@@ -91,6 +91,12 @@
       }
     }
 
+    function millisecondsToNextSecond() {
+      const currentTime = new Date();
+      return 1000 - currentTime.getMilliseconds();
+    }
+
+
     function generateQRCode() {
       clearQRCode();
 
@@ -102,11 +108,14 @@
       });
 
       document.getElementById("time").innerHTML = currentTime.toISOString();
+      setTimeout(function() {
+        generateQRCode();
+      }, millisecondsToNextSecond());
     }
 
-    setInterval(function() {
+    setTimeout(function() {
       generateQRCode();
-    }, 1000);
+    }, millisecondsToNextSecond());
 
   </script>
 </body>
